@@ -1,0 +1,19 @@
+services:
+  bitcoin:
+    image: ruimarinho/bitcoin-core
+    container_name: bitcoin-regtest
+    ports:
+      - "18443:18443" # RPC port
+      - "18444:18444" # P2P port (optional)
+    volumes:
+      - bitcoin_data:/home/bitcoin/.bitcoin
+    environment:
+      BITCOIN_NETWORK: regtest
+      BITCOIN_RPCUSER: user
+      BITCOIN_RPCPASSWORD: password
+      BITCOIN_EXTRA_ARGS: |
+        regtest=1
+        fallbackfee=0.0002
+        server=1
+        txindex=1
+volumes: bitcoin_data:btc
